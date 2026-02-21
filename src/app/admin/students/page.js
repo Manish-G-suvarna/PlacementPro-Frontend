@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Search, Filter, ChevronDown } from 'lucide-react';
 import styles from '../admin.module.css';
 
@@ -16,7 +16,7 @@ export default function StudentsPage() {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-    async function fetchStudents() {
+    const fetchStudents = useCallback(async () => {
         setLoading(true);
         try {
             const token = localStorage.getItem('token');
@@ -38,9 +38,9 @@ export default function StudentsPage() {
         } finally {
             setLoading(false);
         }
-    }
+    }, [page, search, branch, minCgpa, maxBacklogs]);
 
-    useEffect(() => { fetchStudents(); }, [page, branch]);
+    useEffect(() => { fetchStudents(); }, [fetchStudents]);
 
     const handleSearch = (e) => { e.preventDefault(); setPage(1); fetchStudents(); };
 

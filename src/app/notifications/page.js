@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Bell, BellOff, Briefcase, Calendar, CheckCircle } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -16,30 +16,30 @@ export default function NotificationsStudentPage() {
     const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const token = () => localStorage.getItem('token');
-
-    useEffect(() => {
-        if (!user) return;
-        fetchNotifications();
-    }, [user]);
-
-    async function fetchNotifications() {
+    const fetchNotifications = useCallback(async () => {
         setLoading(true);
         try {
+            const token = localStorage.getItem('token');
             const res = await fetch(`${API}/api/notifications/my`, {
-                headers: { Authorization: `Bearer ${token()}` },
+                headers: { Authorization: `Bearer ${token}` },
             });
             if (res.ok) {
                 const data = await res.json();
                 setNotifications(Array.isArray(data) ? data : []);
             }
         } catch { } finally { setLoading(false); }
-    }
+    }, []);
+
+    useEffect(() => {
+        if (!user) return;
+        fetchNotifications();
+    }, [user, fetchNotifications]);
 
     async function markAllRead() {
+        const token = localStorage.getItem('token');
         await fetch(`${API}/api/notifications/my/read`, {
             method: 'PUT',
-            headers: { Authorization: `Bearer ${token()}` },
+            headers: { Authorization: `Bearer ${token}` },
         });
         setNotifications(prev => prev.map(n => ({ ...n, is_read: true })));
     }

@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Plus, Trash2, Edit3, Users, ChevronDown } from 'lucide-react';
 import styles from '../admin.module.css';
 
@@ -18,18 +18,17 @@ export default function DrivesPage() {
     const [applicationsModal, setApplicationsModal] = useState(null); // { drive, applications }
     const [saving, setSaving] = useState(false);
 
-    const token = () => localStorage.getItem('token');
-
-    async function fetchDrives() {
+    const fetchDrives = useCallback(async () => {
         setLoading(true);
         try {
-            const res = await fetch(`${API}/api/drives`, { headers: { Authorization: `Bearer ${token()}` } });
+            const token = localStorage.getItem('token');
+            const res = await fetch(`${API}/api/drives`, { headers: { Authorization: `Bearer ${token}` } });
             const data = await res.json();
             setDrives(Array.isArray(data) ? data : []);
         } catch { } finally { setLoading(false); }
-    }
+    }, []);
 
-    useEffect(() => { fetchDrives(); }, []);
+    useEffect(() => { fetchDrives(); }, [fetchDrives]);
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -39,7 +38,7 @@ export default function DrivesPage() {
             const method = editId ? 'PUT' : 'POST';
             const res = await fetch(url, {
                 method,
-                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` },
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}` },
                 body: JSON.stringify({ ...form, package: form.package }),
             });
             if (res.ok) { setForm(empty); setEditId(null); setShowForm(false); fetchDrives(); }
@@ -48,12 +47,12 @@ export default function DrivesPage() {
 
     async function deleteDrive(id) {
         if (!confirm('Delete this drive?')) return;
-        await fetch(`${API}/api/drives/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token()}` } });
+        await fetch(`${API}/api/drives/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
         fetchDrives();
     }
 
     async function viewEligible(drive) {
-        const res = await fetch(`${API}/api/drives/${drive.id}/eligible-students`, { headers: { Authorization: `Bearer ${token()}` } });
+        const res = await fetch(`${API}/api/drives/${drive.id}/eligible-students`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
         const data = await res.json();
         setEligibleModal({ drive, students: data.students || [] });
     }
@@ -61,7 +60,7 @@ export default function DrivesPage() {
     async function viewApplications(drive) {
         try {
             console.log("Fetching applications for drive", drive.id);
-            const res = await fetch(`${API}/api/drives/${drive.id}/applications`, { headers: { Authorization: `Bearer ${token()}` } });
+            const res = await fetch(`${API}/api/drives/${drive.id}/applications`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
             console.log("Res:", res.status, res.statusText);
             if (res.ok) {
                 const data = await res.json();
@@ -81,7 +80,7 @@ export default function DrivesPage() {
     async function updateAppStatus(driveId, userId, status) {
         const res = await fetch(`${API}/api/drives/${driveId}/applications/${userId}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` },
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}` },
             body: JSON.stringify({ status }),
         });
         if (res.ok) {
@@ -96,7 +95,7 @@ export default function DrivesPage() {
     async function updateStatus(id, status) {
         await fetch(`${API}/api/drives/${id}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` },
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}` },
             body: JSON.stringify({ status }),
         });
         fetchDrives();

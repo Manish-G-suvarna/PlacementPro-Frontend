@@ -105,7 +105,7 @@ export default function PostCard({ post }) {
                         <Bookmark size={22} strokeWidth={1.6} fill={post.is_saved ? 'currentColor' : 'none'} />
                     </button>
                     {post.apply_link && (
-                        <a href={post.apply_link} target="_blank" rel="noopener" className={styles.actionBtn}>
+                        <a href={post.apply_link} target="_blank" rel="noopener noreferrer" className={styles.actionBtn}>
                             <ExternalLink size={22} strokeWidth={1.6} />
                         </a>
                     )}

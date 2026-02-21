@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Briefcase, Calendar, ChevronRight, CheckCircle, Clock } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -27,28 +27,20 @@ export default function DrivesStudentPage() {
     const [applying, setApplying] = useState(null);
     const [tab, setTab] = useState('drives'); // 'drives' | 'interviews'
 
-    const token = () => localStorage.getItem('token');
-
-    useEffect(() => {
-        fetchDrives();
-        fetchInterviews();
-    }, []);
-
-    async function fetchDrives() {
+    const fetchDrives = useCallback(async () => {
         setLoading(true);
         try {
-            // Try eligible endpoint first (requires student_profile)
+            const token = localStorage.getItem('token');
             const res = await fetch(`${API}/api/drives/eligible`, {
-                headers: { Authorization: `Bearer ${token()}` },
+                headers: { Authorization: `Bearer ${token}` },
             });
             const contentType = res.headers.get('content-type') || '';
             if (res.ok && contentType.includes('application/json')) {
                 const data = await res.json();
                 setDrives(Array.isArray(data) ? data : []);
             } else {
-                // Fall back to all drives (no eligibility filter)
                 const res2 = await fetch(`${API}/api/drives`, {
-                    headers: { Authorization: `Bearer ${token()}` },
+                    headers: { Authorization: `Bearer ${token}` },
                 });
                 if (res2.ok) {
                     const data = await res2.json();
@@ -58,26 +50,34 @@ export default function DrivesStudentPage() {
         } catch (err) {
             console.error('Failed to fetch drives:', err);
         } finally { setLoading(false); }
-    }
+    }, []);
 
-    async function fetchInterviews() {
+    const fetchInterviews = useCallback(async () => {
         try {
+            const token = localStorage.getItem('token');
             const res = await fetch(`${API}/api/scheduler/my`, {
-                headers: { Authorization: `Bearer ${token()}` },
+                headers: { Authorization: `Bearer ${token}` },
             });
             if (res.ok) {
                 const data = await res.json();
                 setInterviews(Array.isArray(data) ? data : []);
             }
         } catch { }
-    }
+    }, []);
+
+    useEffect(() => {
+        fetchDrives();
+        fetchInterviews();
+    }, [fetchDrives, fetchInterviews]);
+
 
     async function applyToDrive(driveId) {
         setApplying(driveId);
         try {
+            const token = localStorage.getItem('token');
             const res = await fetch(`${API}/api/drives/${driveId}/apply`, {
                 method: 'POST',
-                headers: { Authorization: `Bearer ${token()}` },
+                headers: { Authorization: `Bearer ${token}` },
             });
             if (res.ok) {
                 setDrives(prev => prev.map(d => d.id === driveId ? { ...d, my_status: 'pending' } : d));

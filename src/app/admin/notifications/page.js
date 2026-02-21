@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Send, CheckCircle, AlertCircle, Bell, X, Clock, Briefcase } from 'lucide-react';
 import styles from '../admin.module.css';
 
@@ -15,14 +15,13 @@ export default function NotificationsPage() {
     const [showConfirm, setShowConfirm] = useState(null);
     const [toast, setToast] = useState(null);
 
-    const token = () => localStorage.getItem('token');
-
-    async function fetchData() {
+    const fetchData = useCallback(async () => {
         setLoading(true);
         try {
+            const token = localStorage.getItem('token');
             const [drivesRes, historyRes] = await Promise.all([
-                fetch(`${API}/api/drives`, { headers: { Authorization: `Bearer ${token()}` } }),
-                fetch(`${API}/api/notifications`, { headers: { Authorization: `Bearer ${token()}` } }),
+                fetch(`${API}/api/drives`, { headers: { Authorization: `Bearer ${token}` } }),
+                fetch(`${API}/api/notifications`, { headers: { Authorization: `Bearer ${token}` } }),
             ]);
             const drives = drivesRes.ok ? await drivesRes.json() : [];
             const hist = historyRes.ok ? await historyRes.json() : [];
@@ -31,16 +30,16 @@ export default function NotificationsPage() {
         } catch (err) {
             console.error('Notifications fetch error:', err);
         } finally { setLoading(false); }
-    }
+    }, []);
 
-    useEffect(() => { fetchData(); }, []);
+    useEffect(() => { fetchData(); }, [fetchData]);
 
     async function handleSend(drive) {
         setSending(drive.id);
         try {
             const res = await fetch(`${API}/api/notifications/send-drive`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` },
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}` },
                 body: JSON.stringify({ drive_id: drive.id }),
             });
             const data = await res.json();

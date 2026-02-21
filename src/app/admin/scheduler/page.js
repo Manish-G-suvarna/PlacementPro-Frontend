@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Plus, Trash2, Calendar } from 'lucide-react';
 import styles from '../admin.module.css';
 
@@ -17,31 +17,36 @@ export default function SchedulerPage() {
     const [saving, setSaving] = useState(false);
     const [filterDrive, setFilterDrive] = useState('');
 
-    const token = () => localStorage.getItem('token');
-
-    async function fetchSlots() {
+    const fetchSlots = useCallback(async () => {
         setLoading(true);
         try {
+            const token = localStorage.getItem('token');
             const params = filterDrive ? `?drive_id=${filterDrive}` : '';
-            const res = await fetch(`${API}/api/scheduler${params}`, { headers: { Authorization: `Bearer ${token()}` } });
+            const res = await fetch(`${API}/api/scheduler${params}`, { headers: { Authorization: `Bearer ${token}` } });
             const data = await res.json();
             setSlots(Array.isArray(data) ? data : []);
         } catch { } finally { setLoading(false); }
-    }
+    }, [filterDrive]);
 
-    async function fetchDrives() {
-        const res = await fetch(`${API}/api/drives`, { headers: { Authorization: `Bearer ${token()}` } });
-        const data = await res.json();
-        setDrives(Array.isArray(data) ? data.filter(d => ['upcoming', 'active'].includes(d.status)) : []);
-    }
+    const fetchDrives = useCallback(async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const res = await fetch(`${API}/api/drives`, { headers: { Authorization: `Bearer ${token}` } });
+            const data = await res.json();
+            setDrives(Array.isArray(data) ? data.filter(d => ['upcoming', 'active'].includes(d.status)) : []);
+        } catch { }
+    }, []);
 
-    useEffect(() => { fetchSlots(); fetchDrives(); }, [filterDrive]);
+    useEffect(() => {
+        fetchSlots();
+        fetchDrives();
+    }, [fetchSlots, fetchDrives]);
 
     // When drive changes in form, load eligible students
     async function onDriveChange(driveId) {
         setForm(p => ({ ...p, drive_id: driveId, user_id: '' }));
         if (!driveId) { setEligibleForDrive([]); return; }
-        const res = await fetch(`${API}/api/drives/${driveId}/eligible-students`, { headers: { Authorization: `Bearer ${token()}` } });
+        const res = await fetch(`${API}/api/drives/${driveId}/eligible-students`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
         const data = await res.json();
         setEligibleForDrive(data.students || []);
     }
@@ -62,7 +67,7 @@ export default function SchedulerPage() {
 
             const res = await fetch(`${API}/api/scheduler/bulk`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` },
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}` },
                 body: JSON.stringify(payload),
             });
             if (res.ok) {
@@ -79,14 +84,14 @@ export default function SchedulerPage() {
 
     async function deleteSlot(id) {
         if (!confirm('Cancel this interview slot?')) return;
-        await fetch(`${API}/api/scheduler/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token()}` } });
+        await fetch(`${API}/api/scheduler/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
         fetchSlots();
     }
 
     async function updateSlotStatus(id, status) {
         await fetch(`${API}/api/scheduler/${id}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token()}` },
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}` },
             body: JSON.stringify({ status }),
         });
         fetchSlots();

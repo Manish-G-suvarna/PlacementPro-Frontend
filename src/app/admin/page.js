@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Briefcase, Users, Calendar, Bell, TrendingUp, Clock } from 'lucide-react';
 import styles from './admin.module.css';
 
@@ -17,7 +17,7 @@ export default function AdminDashboard() {
     const [recentDrives, setRecentDrives] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    async function fetchDashboard() {
+    const fetchDashboard = useCallback(async () => {
         setLoading(true);
         try {
             const token = localStorage.getItem('token');
@@ -34,9 +34,9 @@ export default function AdminDashboard() {
         } finally {
             setLoading(false);
         }
-    }
+    }, []);
 
-    useEffect(() => { fetchDashboard(); }, []);
+    useEffect(() => { fetchDashboard(); }, [fetchDashboard]);
 
     const statCards = stats ? [
         {
