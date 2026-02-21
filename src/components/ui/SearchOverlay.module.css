@@ -301,7 +301,7 @@
 /* Desktop (769px+) */
 @media (min-width: 769px) {
     .container {
-        width: 75%;
+        width: 100%;
         max-width: 720px;
     }
 }
