@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, MapPin, Calendar, ArrowRight } from 'lucide-react';
@@ -88,7 +89,7 @@ export default function SearchOverlay({ open, onClose }) {
 
     if (!open) return null;
 
-    return (
+    return createPortal(
         <AnimatePresence>
             <motion.div
                 className={styles.overlay}
@@ -199,6 +200,7 @@ export default function SearchOverlay({ open, onClose }) {
                     </div>
                 </motion.div>
             </motion.div>
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body
     );
 }
