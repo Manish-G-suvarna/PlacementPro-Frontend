@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Activity, Briefcase, MapPin, Calendar, Search } from "lucide-react";
 import styles from "./RadialNavigation.module.css";
+import SearchOverlay from "./SearchOverlay";
 
 const OPTIONS = [
     { id: "status", icon: Activity, label: "Status" },
@@ -18,6 +19,8 @@ export default function RadialNavigation() {
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
+    const [searchOpen, setSearchOpen] = useState(false);
+    const closeSearch = useCallback(() => setSearchOpen(false), []);
     const containerRef = useRef(null);
     const lastScrollY = useRef(0);
     const shouldReduceMotion = useReducedMotion();
@@ -168,6 +171,9 @@ export default function RadialNavigation() {
                                     } else if (option.id === "status") {
                                         router.push("/status");
                                         setIsOpen(false);
+                                    } else if (option.id === "search") {
+                                        setSearchOpen(true);
+                                        setIsOpen(false);
                                     } else {
                                         console.log(`Clicked ${option.id}`);
                                     }
@@ -199,6 +205,8 @@ export default function RadialNavigation() {
                     style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }}
                 />
             </motion.button>
+
+            <SearchOverlay open={searchOpen} onClose={closeSearch} />
         </motion.div>
     );
 }
