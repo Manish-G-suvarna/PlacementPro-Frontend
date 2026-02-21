@@ -38,7 +38,7 @@
 
 .container {
     width: 96%;
-    max-width: 580px;
+    max-width: 720px;
     background: rgba(20, 20, 30, 0.85);
     -webkit-backdrop-filter: blur(24px);
     backdrop-filter: blur(24px);
@@ -293,15 +293,15 @@
 /* Tablet (481px – 768px) */
 @media (min-width: 481px) and (max-width: 768px) {
     .container {
-        width: 85%;
-        max-width: 520px;
+        width: 90%;
+        max-width: 640px;
     }
 }
 
 /* Desktop (769px+) */
 @media (min-width: 769px) {
     .container {
-        width: 70%;
-        max-width: 580px;
+        width: 75%;
+        max-width: 720px;
     }
 }
