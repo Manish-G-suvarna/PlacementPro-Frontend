@@ -1,0 +1,357 @@
+.root {
+    display: flex;
+    min-height: 100vh;
+    background: #0a0a0f;
+    color: #fafafa;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #111116;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    padding: 28px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+}
+
+.sidebarLogo {
+    padding: 0 24px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 12px;
+}
+
+.sidebarLogo h1 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #fafafa;
+    letter-spacing: -0.5px;
+}
+
+.sidebarLogo span {
+    font-size: 12px;
+    color: #22d3ee;
+    font-weight: 600;
+}
+
+.sidebarNav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 12px;
+    flex: 1;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #71717a;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    transition: all 0.15s;
+}
+
+.navItem:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: #d4d4d8;
+}
+
+.navItemActive {
+    background: rgba(34, 211, 238, 0.08) !important;
+    color: #22d3ee !important;
+    font-weight: 600;
+}
+
+.sidebarFooter {
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-top: auto;
+}
+
+.logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: #71717a;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.15s;
+    width: 100%;
+}
+
+.logoutBtn:hover {
+    background: rgba(239, 68, 68, 0.08);
+    color: #f87171;
+}
+
+/* ── Main content ── */
+.mainArea {
+    flex: 1;
+    margin-left: 260px;
+    padding: 32px 40px;
+    min-height: 100vh;
+}
+
+/* ── Page header ── */
+.pageHeader h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #fafafa;
+    letter-spacing: -0.5px;
+}
+
+.pageHeader p {
+    font-size: 14px;
+    color: #71717a;
+    margin-top: 4px;
+}
+
+/* ── Summary cards ── */
+.summaryGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 28px 0 36px;
+}
+
+.summaryCard {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.summaryCard .label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #52525b;
+}
+
+.summaryCard .value {
+    font-size: 32px;
+    font-weight: 800;
+    color: #fafafa;
+    letter-spacing: -1px;
+}
+
+.summaryCard .sub {
+    font-size: 12px;
+    color: #52525b;
+}
+
+/* ── Cards ── */
+.card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.cardTitle {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fafafa;
+    margin-bottom: 18px;
+}
+
+/* ── Referral cards grid ── */
+.referralGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.referralCard {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.2s;
+}
+
+.referralCard:hover {
+    border-color: rgba(34, 211, 238, 0.25);
+}
+
+.referralCompany {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #22d3ee;
+}
+
+.referralRole {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fafafa;
+}
+
+.referralMeta {
+    font-size: 12px;
+    color: #52525b;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    border: none;
+}
+
+.btnPrimary {
+    composes: btn;
+    background: #22d3ee;
+    color: #000;
+}
+
+.btnPrimary:hover {
+    background: #06b6d4;
+}
+
+.btnOutline {
+    composes: btn;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #d4d4d8;
+}
+
+.btnOutline:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* ── Mentorship ── */
+.mentorCard {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+}
+
+.mentorCard:hover {
+    border-color: rgba(168, 85, 247, 0.25);
+}
+
+.mentorInfo h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fafafa;
+    margin: 0 0 3px;
+}
+
+.mentorInfo p {
+    font-size: 12px;
+    color: #52525b;
+    margin: 0;
+}
+
+.badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.badgeOpen {
+    background: rgba(34, 197, 94, 0.12);
+    color: #22c55e;
+}
+
+.badgeFull {
+    background: rgba(239, 68, 68, 0.12);
+    color: #f87171;
+}
+
+/* ── Activity list ── */
+.activityList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.activityRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.activityRow:last-child {
+    border-bottom: none;
+}
+
+.activityDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.activityRow p {
+    font-size: 13px;
+    color: #a1a1aa;
+    flex: 1;
+}
+
+.activityRow span {
+    font-size: 11px;
+    color: #52525b;
+    white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .mainArea {
+        margin-left: 200px;
+        padding: 24px 20px;
+    }
+
+    .summaryGrid {
+        grid-template-columns: 1fr;
+    }
+}

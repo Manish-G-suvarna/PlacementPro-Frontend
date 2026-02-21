@@ -1,0 +1,110 @@
+.card {
+    background: rgba(24, 24, 27, 0.55);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 28px;
+}
+
+.heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.subheading {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+/* Skill gap rows */
+.gapList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.gapRow {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 20px;
+    transition: border-color 0.2s;
+}
+
+.gapRow:hover {
+    border-color: rgba(234, 179, 8, 0.25);
+}
+
+.gapHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.gapSkill {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.gapPercent {
+    font-size: 13px;
+    font-weight: 700;
+    color: #eab308;
+}
+
+.barOuter {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.barInner {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #eab308, #f59e0b);
+    transition: width 0.6s ease;
+}
+
+.gapAction {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.gapAction strong {
+    color: #22d3ee;
+}
+
+/* Target role */
+.targetRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 14px 18px;
+    background: rgba(34, 211, 238, 0.06);
+    border: 1px solid rgba(34, 211, 238, 0.15);
+    border-radius: 14px;
+}
+
+.roleBadge {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #22d3ee;
+}
+
+.roleTitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+}

@@ -1,0 +1,269 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 80px);
+    padding: 24px 0;
+}
+
+.card {
+    width: 100%;
+    max-width: 380px;
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: var(--accent);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 26px;
+    margin-bottom: 12px;
+}
+
+.brandTitle {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.brandSub {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    margin-top: 14px;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input:focus {
+    border-color: var(--text-muted);
+}
+
+.input::placeholder {
+    color: var(--text-muted);
+}
+
+.pwWrap {
+    position: relative;
+}
+
+.eyeBtn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    color: var(--text-muted);
+    padding: 4px;
+}
+
+.submitBtn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: opacity 0.15s;
+}
+
+.submitBtn:hover {
+    opacity: 0.9;
+}
+
+.submitBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.error {
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(248, 113, 113, 0.08);
+    color: var(--error);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.demo {
+    text-align: center;
+    margin-top: 12px;
+    padding: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.switch {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.link {
+    color: var(--accent-light);
+    font-weight: 600;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+/* Role tabs (login) */
+.roleTabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.roleTab {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* Role selector cards (register step 1) */
+.roleSelector {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.roleCard {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 24px 12px;
+    border-radius: 16px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: inherit;
+    text-align: center;
+}
+
+.roleIconWrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+}
+
+.roleCard:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.15);
+}
+
+.roleCard:hover .roleIconWrap {
+    background: rgba(79, 70, 229, 0.12);
+    color: var(--accent-light);
+}
+
+.roleCard strong {
+    font-size: 14px;
+    color: var(--text);
+}
+
+.roleCard span {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* Back button */
+.backBtn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 16px;
+    font-family: inherit;
+    transition: color 0.15s;
+}
+
+.backBtn:hover {
+    color: var(--text);
+}
+
+/* Role indicator badge */
+.roleIndicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Form row (side-by-side fields) */
+.formRow {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 0;
+}
+
+.formHalf {
+    flex: 1;
+}

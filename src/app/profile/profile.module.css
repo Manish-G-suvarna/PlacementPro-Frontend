@@ -1,0 +1,91 @@
+.header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 24px 0 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+}
+
+.avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(124, 92, 252, 0.2);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.info {
+    flex: 1;
+}
+
+.name {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.email {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+.logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: rgba(248, 113, 113, 0.1);
+    color: var(--error);
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.15s;
+}
+
+.logoutBtn:hover {
+    background: rgba(248, 113, 113, 0.2);
+}
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--surface);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+}
+
+.tab:hover {
+    border-color: var(--accent);
+}
+
+.tabActive {
+    background: rgba(124, 92, 252, 0.1);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+}

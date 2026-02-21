@@ -1,0 +1,132 @@
+.navContainer {
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blurOverlay {
+  position: fixed;
+  top: -10vh;
+  left: -50vw;
+  /* Offset the 50% left of navContainer */
+  width: 110vw;
+  height: 110vh;
+  background: rgba(0, 0, 0, 0.4);
+  /* Subtly darken behind the menu */
+  z-index: -1;
+  /* Keep it behind the buttons */
+  cursor: pointer;
+}
+
+.centerButton {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--surface-light, #1a1a1a);
+  color: var(--text, #f5f5f5);
+  box-shadow:
+    8px 8px 16px rgba(0, 0, 0, 0.4),
+    -8px -8px 16px rgba(255, 255, 255, 0.05);
+  /* Neumorphism dark */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  outline: none;
+}
+
+.centerButton:hover {
+  box-shadow:
+    10px 10px 20px rgba(0, 0, 0, 0.5),
+    -10px -10px 20px rgba(255, 255, 255, 0.08);
+  /* slightly stronger on hover */
+}
+
+.centerButton:focus-visible {
+  box-shadow: 0 0 0 2px var(--accent, #7c5cfc);
+}
+
+.centerButton:active {
+  box-shadow:
+    inset 4px 4px 8px rgba(0, 0, 0, 0.5),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+}
+
+.optionButton {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--surface, #121212);
+  color: var(--text-secondary, #a8a8a8);
+  box-shadow:
+    4px 4px 10px rgba(0, 0, 0, 0.4),
+    -4px -4px 10px rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: box-shadow 0.2s ease, color 0.2s ease;
+  outline: none;
+}
+
+.optionButton:hover,
+.optionButton:focus-visible {
+  color: var(--accent, #7c5cfc);
+  box-shadow:
+    6px 6px 14px rgba(0, 0, 0, 0.5),
+    -6px -6px 14px rgba(255, 255, 255, 0.08);
+}
+
+.optionButton:active {
+  box-shadow:
+    inset 3px 3px 6px rgba(0, 0, 0, 0.5),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.05);
+}
+
+.tooltipContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: -36px;
+  background: var(--surface-light, #1a1a1a);
+  color: var(--text, #f5f5f5);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+}
+
+.optionButton:hover .tooltip,
+.optionButton:focus-visible .tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Light mode fallback if no custom properties */
+@media (prefers-color-scheme: light) {
+  :root {
+    --nav-shade-dark: rgba(163, 177, 198, 0.6);
+    --nav-shade-light: rgba(255, 255, 255, 0.8);
+  }
+}

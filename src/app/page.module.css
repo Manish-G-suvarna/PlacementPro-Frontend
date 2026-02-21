@@ -1,0 +1,28 @@
+.pageTitle {
+  font-size: 24px;
+  font-weight: 700;
+  padding-top: 12px;
+  margin-bottom: 2px;
+  color: var(--text);
+}
+
+.pageSub {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.endMsg {
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}

@@ -1,0 +1,72 @@
+.card {
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+.line {
+    height: 12px;
+    border-radius: 6px;
+}
+
+.h18 {
+    height: 18px;
+}
+
+.w30 {
+    width: 30%;
+}
+
+.w60 {
+    width: 60%;
+}
+
+.w80 {
+    width: 80%;
+}
+
+.w90 {
+    width: 90%;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.mt4 {
+    margin-top: 4px;
+}
+
+.mt6 {
+    margin-top: 6px;
+}
+
+.block {
+    height: 180px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.tagRow {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tagBlock {
+    width: 55px;
+    height: 20px;
+    border-radius: 6px;
+}
