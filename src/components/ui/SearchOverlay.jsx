@@ -98,6 +98,10 @@ export default function SearchOverlay({ open, onClose }) {
                 transition={{ duration: 0.2 }}
                 onClick={onClose}
             >
+                {/* Standalone close button */}
+                <button className={styles.overlayCloseBtn} onClick={onClose} aria-label="Close search">
+                    <X size={24} />
+                </button>
                 <motion.div
                     className={styles.container}
                     initial={{ opacity: 0, y: -30, scale: 0.95 }}
@@ -163,7 +167,7 @@ export default function SearchOverlay({ open, onClose }) {
                                 onClick={() => handleResultClick(post.id)}
                                 initial={{ opacity: 0, y: 8 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                whileHover={{ backgroundColor: '#f8f7ff' }}
+                                whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.06)' }}
                                 transition={{ duration: 0.15 }}
                             >
                                 <div className={styles.resultLeft}>
