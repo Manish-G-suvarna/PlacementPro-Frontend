@@ -8,7 +8,7 @@ import Earth from './Earth';
 import Markers from './Markers';
 import CountryLabels from './CountryLabels';
 import DynamicControls from './DynamicControls';
-import SearchBar from '../UI/SearchBar';
+import SearchBar from '../ui/SearchBar';
 import styles from './GlobeView.module.css';
 import { gsap } from 'gsap';
 import { getPosFromLatLng } from './utils';
